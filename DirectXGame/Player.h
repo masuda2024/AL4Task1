@@ -5,7 +5,8 @@
 class MapChipField;
 class Enemy;
 class Goal;
-class Player {
+class Player 
+{
 public:
 	// デスフラグ
 	bool isDead_ = false;
@@ -26,7 +27,8 @@ public:
 	void SetMapChipField(MapChipField* mapChipField) { mapChipField_ = mapChipField; }
 
 	// マップとの当たり判定情報
-	struct CollisionMapInfo {
+	struct CollisionMapInfo
+	{
 		bool ceiling = false;            // 天井衝突フラグ
 		bool langing = false;            // 着地フラグ
 		bool hitwall = false;            // 壁接触フラグ
@@ -49,7 +51,8 @@ public:
 	// 着地フラグ
 
 	// 角
-	enum Corner {
+	enum Corner 
+	{
 		kRightBottom, // 右下
 		kLeftBottom,  // 左下
 		kRightTop,    // 右上
@@ -81,7 +84,8 @@ public:
 	static inline const float kAttenuationWall = 0.9f;
 
 	// 左右
-	enum class LRDirection {
+	enum class LRDirection
+	{
 		kRight,
 		kLeft,
 	};
@@ -94,6 +98,15 @@ public:
 	static inline const float kTimeTurn = 0.3f;
 	// 接地状態フラグ
 	bool onGround_ = true;
+
+
+	
+	
+
+
+
+
+
 
 	LRDirection lrDirection_ = LRDirection::kRight;
 
@@ -140,4 +153,15 @@ private:
 	KamataEngine::Model* model_;
 
 	KamataEngine::Vector3 velocity_ = {};
+
+
+
+
+
+
+	// 現在のジャンプ回数
+	int jumpCount_ = 0;
+
+	// 最大ジャンプ数
+	int MaxJump_ = 2;
 };

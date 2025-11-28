@@ -33,7 +33,7 @@ void GameScene::Initialize()
 	cube_ = Model::CreateFromOBJ("block");
 
 	// 3Dモデルデータの生成
-	modelPlayer_ = Model::CreateFromOBJ("Player", true);
+	modelPlayer_ = Model::CreateFromOBJ("player", true);
 
 	// 敵の3Dモデルデータの生成
 	modelEnemy_ = Model::CreateFromOBJ("enemy", true);

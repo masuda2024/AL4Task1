@@ -10,7 +10,8 @@
 using namespace KamataEngine;
 using namespace MathUtility;
 
-KamataEngine::Vector3 Goal::GetWorldPosition() {
+KamataEngine::Vector3 Goal::GetWorldPosition()
+{
 	// ワールド座標を入れる変数
 	KamataEngine::Vector3 worldPos;
 	// ワールド行列の平行移動成分を取得(ワールド座標)
@@ -21,7 +22,8 @@ KamataEngine::Vector3 Goal::GetWorldPosition() {
 	return worldPos;
 }
 
-AABB2 Goal::GetAABB2() {
+AABB2 Goal::GetAABB2()
+{
 	KamataEngine::Vector3 worldPos = GetWorldPosition();
 
 	AABB2 aabb;
@@ -34,7 +36,8 @@ AABB2 Goal::GetAABB2() {
 
 void Goal::OnCollitionGoal(const Player* player) { (void)player; }
 
-void Goal::Initialize(KamataEngine::Model* model, KamataEngine::Camera* camera, KamataEngine::Vector3& position) {
+void Goal::Initialize(KamataEngine::Model* model, KamataEngine::Camera* camera, KamataEngine::Vector3& position) 
+{
 	// NULLポイントチェック
 	assert(model);
 
@@ -56,7 +59,8 @@ void Goal::Initialize(KamataEngine::Model* model, KamataEngine::Camera* camera, 
 	worldTransform_.Initialize();
 }
 
-void Goal::Update() {
+void Goal::Update()
+{
 	// プレイヤーの座標の計算
 	worldTransform_.matWorld_ = MakeAffineMatrix(worldTransform_.scale_, worldTransform_.rotation_, worldTransform_.translation_);
 	worldTransform_.TransferMatrix();

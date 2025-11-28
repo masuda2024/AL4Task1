@@ -4,7 +4,8 @@
 
 class MapChipField;
 class Player;
-class Goal {
+class Goal
+{
 public:
 	/**/
 	// 敵の当たり判定サイズ

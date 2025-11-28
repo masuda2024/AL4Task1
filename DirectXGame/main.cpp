@@ -12,7 +12,8 @@ using namespace KamataEngine;
 // DirectXCommonインスタンスの取得
 DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
-enum class Scene {
+enum class Scene
+{
 	kUnknown = 0,
 	kTitle,
 	kTutorial,
@@ -38,8 +39,9 @@ GameOver* gameover = nullptr;
 GameClear* gameclear = nullptr;
 
 // Windowsアプリでのエントリーポイント(main関数)
-int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
-	KamataEngine::Initialize(L"LE2D_21_マスダ_アキヒロ_ロボットの冒険");
+int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
+{
+	KamataEngine::Initialize(L"LE2D_21_マスダ_アキヒロ_AL4");
 
 	// 最初のシーンの初期化
 	// タイトルシーンから開始
@@ -66,9 +68,11 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 	gameScene->Initialize();
 	*/
 
-	while (true) {
+	while (true)
+	{
 		// エンジンの更新
-		if (KamataEngine::Update()) {
+		if (KamataEngine::Update())
+		{
 			break;
 		}
 
@@ -121,8 +125,10 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 	return 0;
 }
 
-void UpdateScene() {
-	switch (scene) {
+void UpdateScene()
+{
+	switch (scene)
+	{
 	case Scene::kTitle:
 		titleScene->Update();
 		break;
@@ -145,13 +151,16 @@ void UpdateScene() {
 	}
 }
 
-void ChangeScene() {
+void ChangeScene() 
+{
 
-	switch (scene) {
+	switch (scene) 
+	{
 	case Scene::kTitle:
 
 		// ゲームシーンへ
-		if (titleScene->IsFinished()) {
+		if (titleScene->IsFinished()) 
+		{
 			// シーンの変更
 			scene = Scene::kGame;
 
@@ -163,7 +172,8 @@ void ChangeScene() {
 			gameScene = new GameScene();
 			gameScene->Initialize();
 		} // チュートリアルシーンへ
-		else if (titleScene->IsFinished2()) {
+		else if (titleScene->IsFinished2()) 
+		{
 			// シーンの変更
 			scene = Scene::kTutorial;
 
@@ -179,7 +189,8 @@ void ChangeScene() {
 		break;
 	case Scene::kTutorial:
 
-		if (tutorial->IsFinishedTutorial()) {
+		if (tutorial->IsFinishedTutorial()) 
+		{
 			// シーンの変更
 			scene = Scene::kTitle;
 
@@ -195,7 +206,8 @@ void ChangeScene() {
 	case Scene::kGame:
 
 		// ゲームシーンで敵に当たったら
-		if (gameScene->IsFinishedGame1()) {
+		if (gameScene->IsFinishedGame1()) 
+		{
 			// シーンの変更
 			scene = Scene::kGameOver;
 
@@ -210,7 +222,8 @@ void ChangeScene() {
 			// ゲームオーバーシーンへ
 			gameover = new GameOver;
 			gameover->Initialize();
-		} else if (gameScene->IsFinishedGame2()) {
+		} else if (gameScene->IsFinishedGame2())
+		{
 			// シーンの変更
 			scene = Scene::kGameClear;
 
@@ -226,7 +239,8 @@ void ChangeScene() {
 
 	case Scene::kGameOver:
 
-		if (gameover->IsFinishedGameOver()) {
+		if (gameover->IsFinishedGameOver()) 
+		{
 			// シーンの変更
 			scene = Scene::kTitle;
 
@@ -241,7 +255,8 @@ void ChangeScene() {
 		break;
 
 	case Scene::kGameClear:
-		if (gameclear->IsFinishedGameClear()) {
+		if (gameclear->IsFinishedGameClear())
+		{
 			// シーンの変更
 			scene = Scene::kTitle;
 
@@ -257,8 +272,10 @@ void ChangeScene() {
 	} // switch (scene)
 } // void ChangeScene()
 
-void DrawScene() {
-	switch (scene) {
+void DrawScene() 
+{
+	switch (scene)
+	{
 	case Scene::kTitle:
 		titleScene->Draw();
 		break;

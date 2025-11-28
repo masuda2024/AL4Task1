@@ -4,9 +4,11 @@
 #include "Player.h"
 #include "Skydome.h"
 
-class GameOver {
+class GameOver
+{
 public:
-	enum class Phase {
+	enum class Phase 
+	{
 		kFadeIn,  // フェードイン
 		kMain,    // メイン部
 		kFadeOut, // フェードアウト

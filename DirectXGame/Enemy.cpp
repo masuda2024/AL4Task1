@@ -10,7 +10,8 @@
 using namespace KamataEngine;
 using namespace MathUtility;
 
-void Enemy::Initialize(Model* model, Camera* camera, KamataEngine::Vector3& position) {
+void Enemy::Initialize(Model* model, Camera* camera, KamataEngine::Vector3& position) 
+{
 	// NULLポイントチェック
 	assert(model);
 
@@ -32,7 +33,8 @@ void Enemy::Initialize(Model* model, Camera* camera, KamataEngine::Vector3& posi
 	worldTransform_.Initialize();
 }
 
-void Enemy::Update() {
+void Enemy::Update() 
+{
 
 	
 
@@ -49,7 +51,8 @@ void Enemy::Update() {
 
 void Enemy::Draw() { model_->Draw(worldTransform_, *camera_); }
 
-KamataEngine::Vector3 Enemy::GetWorldPosition() {
+KamataEngine::Vector3 Enemy::GetWorldPosition()
+{
 	// ワールド座標を入れる変数
 	KamataEngine::Vector3 worldPos;
 	// ワールド行列の平行移動成分を取得(ワールド座標)
@@ -60,7 +63,8 @@ KamataEngine::Vector3 Enemy::GetWorldPosition() {
 	return worldPos;
 }
 
-AABB Enemy::GetAABB() {
+AABB Enemy::GetAABB()
+{
 	KamataEngine::Vector3 worldPos = GetWorldPosition();
 
 	AABB aabb;

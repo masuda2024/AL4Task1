@@ -5,9 +5,11 @@
 
 #include "Player.h"
 #include "Skydome.h"
-class GameClear {
+class GameClear
+{
 public:
-	enum class Phase {
+	enum class Phase 
+	{
 		kFadeIn,  // フェードイン
 		kMain,    // メイン部
 		kFadeOut, // フェードアウト

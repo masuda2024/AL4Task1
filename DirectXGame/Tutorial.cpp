@@ -4,7 +4,8 @@
 
 using namespace KamataEngine;
 
-void Tutorial::Initialize() {
+void Tutorial::Initialize()
+{
 	// 3Dモデルの生成
 	// model_ = Model::CreateFromOBJ("titleFont");
 	// modelPlayer_ = Model::CreateFromOBJ("player");
@@ -13,7 +14,7 @@ void Tutorial::Initialize() {
 	modelskydome_ = Model::CreateFromOBJ("skydome", true);
 	skydome_ = new Skydome();
 
-	// modelTutorialUI_ = Model::CreateFromOBJ("TutorialUI");
+	modelTutorialUI_ = Model::CreateFromOBJ("TutorialUI");
 
 	// カメラの初期化
 	camera_.Initialize();
@@ -27,11 +28,14 @@ void Tutorial::Initialize() {
 	fade_->Start(Fade::Status::FadeIn, 1.0f);
 }
 
-void Tutorial::Update() {
-	switch (phase_) {
+void Tutorial::Update()
+{
+	switch (phase_)
+	{
 	case Phase::kMain:
 		// チュートリアルシーンの終了条件
-		if (Input::GetInstance()->PushKey(DIK_E)) {
+		if (Input::GetInstance()->PushKey(DIK_E)) 
+		{
 			// フェードアウト開始
 			phase_ = Phase::kFadeOut;
 			fade_->Start(Fade::Status::FadeOut, 1.0f);
@@ -40,25 +44,27 @@ void Tutorial::Update() {
 	case Phase::kFadeIn:
 		// フェード
 		fade_->Update();
-		if (fade_->IsFinished()) {
+		if (fade_->IsFinished()) 
+		{
 			phase_ = Phase::kMain;
 		}
 		break;
 	case Phase::kFadeOut:
 		// フェード
 		fade_->Update();
-		if (fade_->IsFinished()) {
+		if (fade_->IsFinished()) 
+		{
 			finishedTutorial_ = true;
 		}
 		break;
 	}
 }
 
-void Tutorial::Draw() {
+void Tutorial::Draw() 
+{
 	// 3Dモデル描画前処理
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
-
-	Model::PreDraw(dxCommon->GetCommandList());
+	
+	Model::PreDraw();
 
 	// ここに3Dモデルインスタンスの描画処理を記述する
 	// model_->Draw(worldTransform_, camera_);
@@ -72,7 +78,8 @@ void Tutorial::Draw() {
 	fade_->Draw();
 }
 
-Tutorial::~Tutorial() {
+Tutorial::~Tutorial() 
+{
 	// モデル
 	delete model_;
 	delete modelskydome_;

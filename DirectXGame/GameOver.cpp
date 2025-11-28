@@ -4,7 +4,8 @@
 
 using namespace KamataEngine;
 
-void GameOver::Initialize() {
+void GameOver::Initialize() 
+{
 	// 3Dモデルの生成
 	// model_ = Model::CreateFromOBJ("titleFont");
 	// modelPlayer_ = Model::CreateFromOBJ("player");
@@ -26,11 +27,14 @@ void GameOver::Initialize() {
 	fade_->Start(Fade::Status::FadeIn, 1.0f);
 }
 
-void GameOver::Update() {
-	switch (phase_) {
+void GameOver::Update()
+{
+	switch (phase_)
+	{
 	case Phase::kMain:
 		// チュートリアルシーンの終了条件
-		if (Input::GetInstance()->PushKey(DIK_SPACE)) {
+		if (Input::GetInstance()->PushKey(DIK_SPACE))
+		{
 			// フェードアウト開始
 			phase_ = Phase::kFadeOut;
 			fade_->Start(Fade::Status::FadeOut, 1.0f);
@@ -39,25 +43,27 @@ void GameOver::Update() {
 	case Phase::kFadeIn:
 		// フェード
 		fade_->Update();
-		if (fade_->IsFinished()) {
+		if (fade_->IsFinished())
+		{
 			phase_ = Phase::kMain;
 		}
 		break;
 	case Phase::kFadeOut:
 		// フェード
 		fade_->Update();
-		if (fade_->IsFinished()) {
+		if (fade_->IsFinished()) 
+		{
 			finishedGameOver_ = true;
 		}
 		break;
 	}
 }
 
-void GameOver::Draw() {
+void GameOver::Draw()
+{
 	// 3Dモデル描画前処理
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
-
-	Model::PreDraw(dxCommon->GetCommandList());
+	
+	Model::PreDraw();
 
 	// ここに3Dモデルインスタンスの描画処理を記述する
 	// modelGameOver_->Draw(worldTransform_, camera_);
@@ -72,7 +78,8 @@ void GameOver::Draw() {
 	fade_->Draw();
 }
 
-GameOver::~GameOver() {
+GameOver::~GameOver() 
+{
 	// モデル
 	// delete modelGameOver_;
 	// delete model_;

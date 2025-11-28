@@ -1,19 +1,23 @@
 #pragma once
 #include"KamataEngine.h"
 
-enum class MapChipType {
+enum class MapChipType
+{
 	kBlank, // 空白
 	kBlock, // ブロック
 };
 
-struct MapChipData {
+struct MapChipData 
+{
 	std::vector<std::vector<MapChipType>> data;
 };
 
-class MapChipField {
+class MapChipField 
+{
 
 public:
-	struct IndexSet {
+	struct IndexSet
+	{
 		uint32_t xIndex;
 		uint32_t yIndex;
 	};
@@ -25,7 +29,8 @@ public:
 	KamataEngine::Vector3 GetMapChipPositionByIndex(uint32_t xIndex, uint32_t yIndex);
 
 	// 範囲短形
-	struct Rect {
+	struct Rect
+	{
 		float left;   // 左端
 		float right;  // 右端
 		float bottom; // 下端

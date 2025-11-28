@@ -8,8 +8,8 @@ using namespace KamataEngine;
 void TitleScene::Initialize() 
 {
 	// 3Dモデルの生成
-	// model_ = Model::CreateFromOBJ("titleFont02");
-	// modelTitle_UI_ = Model::CreateFromOBJ("Title_UI");
+	//model_ = Model::CreateFromOBJ("titleFont02");
+	modelTitle_UI_ = Model::CreateFromOBJ("Title_UI");
 
 	// modelPlayer_ = Model::CreateFromOBJ("Player03");
 	//  3Dモデルの生成
@@ -106,9 +106,9 @@ void TitleScene::Draw()
 	Model::PreDraw();
 
 	// ここに3Dモデルインスタンスの描画処理を記述する
-	// model_->Draw(worldTransform_, camera_);
+	//model_->Draw(worldTransform_, camera_);
 
-	// modelTitle_UI_->Draw(worldTransform_, camera_);
+	modelTitle_UI_->Draw(worldTransform_, camera_);
 	//  modelPlayer_->Draw(worldTransformPlayer_, camera_);
 
 	modelskydome_->Draw(worldTransformPlayer_, camera_);

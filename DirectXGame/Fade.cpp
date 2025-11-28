@@ -3,7 +3,8 @@
 using namespace KamataEngine;
 
 // 初期化
-void Fade::Initialize() {
+void Fade::Initialize() 
+{
 	// ファイル名を指定してテクスチャを読み込む
 	textureHandle_ = TextureManager::Load("white1x1.png");
 	// スプライトインデックスの生成
@@ -14,9 +15,11 @@ void Fade::Initialize() {
 	sprite_->SetColor(Vector4(0, 0, 0, 1));
 }
 // 更新
-void Fade::Update() {
+void Fade::Update() 
+{
 	// フェード状態による分岐
-	switch (status_) {
+	switch (status_) 
+	{
 	case Fade::Status::None:
 		// 何もしない
 		break;
@@ -25,7 +28,8 @@ void Fade::Update() {
 		// 1フレーム分の秒数カウントアップ
 		counter_ += 1.0f / 60.0f;
 		// フェード継続時間に達したら打ち止め
-		if (counter_ >= duration_) {
+		if (counter_ >= duration_)
+		{
 			counter_ = duration_;
 		}
 		// 0.0fから1.0fの間で、
@@ -38,7 +42,8 @@ void Fade::Update() {
 		// 1フレーム分の秒数カウントアップ
 		counter_ += 1.0f / 60.0f;
 		// フェード継続時間に達したら打ち止め
-		if (counter_ >= duration_) {
+		if (counter_ >= duration_)
+		{
 			counter_ = duration_;
 		}
 		// 0.0fから1.0fの間で、
@@ -49,8 +54,10 @@ void Fade::Update() {
 	}
 }
 // 描画
-void Fade::Draw() {
-	if (status_ == Status::None) {
+void Fade::Draw() 
+{
+	if (status_ == Status::None)
+	{
 		return;
 	}
 	// DirectXCommonインスタンスの取得
@@ -62,7 +69,8 @@ void Fade::Draw() {
 	KamataEngine::Sprite::PostDraw();
 }
 
-void Fade::Start(Status status, float duration) {
+void Fade::Start(Status status, float duration)
+{
 	status_ = status;
 	duration_ = duration;
 	counter_ = 0.0f;
@@ -70,26 +78,34 @@ void Fade::Start(Status status, float duration) {
 
 void Fade::Stop() { status_ = Status::None; }
 
-bool Fade::IsFinished() const {
-	switch (status_) {
+bool Fade::IsFinished() const 
+{
+	switch (status_) 
+	{
 	case Fade::Status::FadeIn:
 	case Fade::Status::FadeOut:
-		if (counter_ >= duration_) {
+		if (counter_ >= duration_)
+		{
 			return true;
-		} else {
+		} else
+		{
 			return false;
 		}
 	}
 	return true;
 }
 
-bool Fade::IsFinished2() const {
-	switch (status_) {
+bool Fade::IsFinished2() const
+{
+	switch (status_)
+	{
 	case Fade::Status::FadeIn:
 	case Fade::Status::FadeOut:
-		if (counter_ >= duration_) {
+		if (counter_ >= duration_)
+		{
 			return true;
-		} else {
+		} else 
+		{
 			return false;
 		}
 	}
