@@ -73,7 +73,7 @@ void Player::InputMove()
 	// 左右移動操作
 	if (onGround_)
 	{
-		
+		atAir = false;
 		jumpCount_ = 0;
 		
 		#pragma region 左右移動
@@ -135,11 +135,9 @@ void Player::InputMove()
 			// ジャンプ初速
 			velocity_ += Vector3(0, kJumpAcceleration, 0);	
 			jumpCount_ += 1;
+			atAir = true;
 		}
-		
 			
-		
-		
 
 	}
 	// 空中
@@ -202,6 +200,51 @@ void Player::InputMove()
 
 
 	}
+	if (atAir == 1)
+	{
+		// 左右加速
+		Vector3 acceleration = {};
+
+		if (Input::GetInstance()->PushKey(DIK_RIGHT) || Input::GetInstance()->PushKey(DIK_D))
+		{
+			// 左移動中の右入力
+			if (velocity_.x < 0.0f)
+			{
+				// 速度と逆方向に入力中は急ブレーキ
+				velocity_.x *= (1.0f - kAttenuation);
+			}
+			acceleration.x += kAccleration;
+			if (lrDirection_ != LRDirection::kRight)
+			{
+				lrDirection_ = LRDirection::kRight;
+				// 旋回開始時の角度を記録する
+				trunFirstRotationY_ = worldTransform_.rotation_.y;
+				// 旋回タイマーに時間を設定する
+				trunTimer_ = kTimeTurn;
+			}
+		} else if (Input::GetInstance()->PushKey(DIK_LEFT) || Input::GetInstance()->PushKey(DIK_A))
+		{
+			// 右移動中の左入力
+			if (velocity_.x > 0.0f) 
+			{
+				// 速度と逆方向に入力中は急ブレーキ
+				velocity_.x *= (1.0f - kAttenuation);
+			}
+			acceleration.x -= kAccleration;
+			if (lrDirection_ != LRDirection::kLeft) 
+			{
+				lrDirection_ = LRDirection::kLeft;
+				// 旋回開始時の角度を記録する
+				trunFirstRotationY_ = worldTransform_.rotation_.y;
+				// 旋回タイマーに時間を設定する
+				trunTimer_ = kTimeTurn;
+			}
+		}
+		
+	}
+
+
+
 }
 
 #pragma region マップ衝突チェック

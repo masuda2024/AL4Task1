@@ -100,7 +100,7 @@ public:
 	bool onGround_ = true;
 
 
-	
+	int atAir = false;
 	
 
 
