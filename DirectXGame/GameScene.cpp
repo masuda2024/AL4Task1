@@ -49,16 +49,31 @@ void GameScene::Initialize()
 	// 自キャラの生成
 	player_ = new Player();
 
+
+
+
+
+	
 	// 敵の生成
 	// enemy_ = new Enemy();
 	for (int32_t i = 0; i < 5; i++)
 	{
-		Enemy* newEnemy = new Enemy();
-		KamataEngine::Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(32 + i * 20, 18);
-		newEnemy->Initialize(modelEnemy_, &camera_, enemyPosition);
+		for (int32_t j = 0; j < 3; j++)
+		{
+			Enemy* newEnemy = new Enemy();
+			KamataEngine::Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(32 + i * 20, 8 * j);
+			newEnemy->Initialize(modelEnemy_, &camera_, enemyPosition);
 
-		enemies_.push_back(newEnemy);
+			enemies_.push_back(newEnemy);
+		}
+		
 	}
+
+
+	
+
+
+
 
 	// ゴールの生成
 	goal_ = new Goal();
