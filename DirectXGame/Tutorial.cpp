@@ -7,8 +7,11 @@ using namespace KamataEngine;
 void Tutorial::Initialize()
 {
 	// 3Dモデルの生成
-	// model_ = Model::CreateFromOBJ("titleFont");
-	// modelPlayer_ = Model::CreateFromOBJ("player");
+	
+	// Springin ボタン・システム　決定1
+	Botan_ = Audio::GetInstance()->LoadWave("Sounds/Decision1.mp3");
+
+
 
 	// スカイドームの生成
 	modelskydome_ = Model::CreateFromOBJ("skydome", true);
@@ -34,8 +37,9 @@ void Tutorial::Update()
 	{
 	case Phase::kMain:
 		// チュートリアルシーンの終了条件
-		if (Input::GetInstance()->PushKey(DIK_E)) 
+		if (Input::GetInstance()->TriggerKey(DIK_E)) 
 		{
+			Audio::GetInstance()->PlayWave(Botan_);
 			// フェードアウト開始
 			phase_ = Phase::kFadeOut;
 			fade_->Start(Fade::Status::FadeOut, 1.0f);
@@ -67,11 +71,13 @@ void Tutorial::Draw()
 	Model::PreDraw();
 
 	// ここに3Dモデルインスタンスの描画処理を記述する
-	// model_->Draw(worldTransform_, camera_);
-	// modelPlayer_->Draw(worldTransformPlayer_, camera_);
+	
 
 	modelskydome_->Draw(worldTransform_, camera_);
 	modelTutorialUI_->Draw(worldTransform_, camera_);
+	
+	
+	
 	// 3Dモデル描画後処理
 	Model::PostDraw();
 	// フェード

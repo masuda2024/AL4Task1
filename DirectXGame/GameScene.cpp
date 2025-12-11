@@ -46,14 +46,38 @@ void GameScene::Initialize()
 	// パーティクルの3Dモデルデータの生成
 	modelParticle_ = Model::CreateFromOBJ("deathParticle", true);
 
+
+	
+
+
+
+
+
+
+
+
 	// 自キャラの生成
 	player_ = new Player();
 
 
+	// 座標をマップチップ番号で指定
+	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(1, 18);
+	player_->Initialize(modelPlayer_, &camera_, playerPosition);
+	player_->SetMapChipField(mapChipField_); // 自キャラの生成と初期化
+
+
+	// パーティクル
+	deathParticles_ = new DeathParticle();
+	deathParticles_->Initialize(modelParticle_, &camera_, playerPosition);
+
+	// playerHPのスプライト
+	playerhpHandle_ = TextureManager::Load("hp.png");
+	playerhpSprite_ = KamataEngine::Sprite::Create(playerhpHandle_, {0, 0});
 
 
 
-	
+
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 	// 敵の生成
 	// enemy_ = new Enemy();
 	for (int32_t i = 0; i < 5; i++)
@@ -81,11 +105,7 @@ void GameScene::Initialize()
 	// マップチップフィールドの生成
 	mapChipField_ = new MapChipField;
 
-	// 座標をマップチップ番号で指定
-	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(1, 18);
-	player_->Initialize(modelPlayer_, &camera_, playerPosition);
-	player_->SetMapChipField(mapChipField_); // 自キャラの生成と初期化
-
+	
 	/**/
 	// パーティクル
 	deathParticles_ = new DeathParticle();
@@ -95,6 +115,9 @@ void GameScene::Initialize()
 	Vector3 goalPosition = mapChipField_->GetMapChipPositionByIndex(80, 18);
 	goal_->Initialize(modelGoal_, &camera_, goalPosition);
 	goal_->SetMapChipField(mapChipField_);
+
+
+
 
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
@@ -218,6 +241,15 @@ void GameScene::Update()
 
 	// フェード
 	fade_->Update();
+
+
+	// プレイヤーHP
+	float hpRatio = (float)player_->GetHP() / (float)player_->GetMaxHP();
+	hpRatio = std::clamp(hpRatio, 0.0f, 1.0f);
+	playerhpSprite_->SetSize({hpRatio * 200.0f, 20.0f}); // 例：幅200px、高さ20px
+	playerhpSprite_->SetPosition({0, 0});                // 左上に表示
+
+
 
 	switch (phase_)
 	{
@@ -415,6 +447,11 @@ void GameScene::Draw()
 
 	// 3Dモデル描画前処理
 	Model::PostDraw(); // プログラムの終了
+
+	// HPバーの描画
+	Sprite::PreDraw();
+	playerhpSprite_->Draw();
+	Sprite::PostDraw();
 
 	// フェード
 	fade_->Draw();

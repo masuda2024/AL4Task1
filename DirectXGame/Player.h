@@ -8,6 +8,12 @@ class Goal;
 class Player 
 {
 public:
+
+
+	// Getter / 状態確認
+	int GetHP() const { return hp_; }
+	int GetMaxHP() const { return maxHP_; }
+
 	// デスフラグ
 	bool isDead_ = false;
 	// デスフラグのgetter
@@ -164,4 +170,8 @@ private:
 
 	// 最大ジャンプ数
 	int MaxJump_ = 2;
+
+
+	int maxHP_ = 10;
+	int hp_ = maxHP_;
 };

@@ -17,6 +17,13 @@ void GameClear::Initialize()
 	modelGameClear_ = Model::CreateFromOBJ("GAMECLEARFont");
 	model_ = Model::CreateFromOBJ("SPACE_UI");
 
+
+	// Springin ボタン・システム　決定1
+	Botan_ = Audio::GetInstance()->LoadWave("Sounds/Decision1.mp3");
+
+
+
+
 	// カメラの初期化
 	camera_.Initialize();
 	// ワールド変換の初期化
@@ -35,8 +42,9 @@ void GameClear::Update()
 	{
 	case Phase::kMain:
 		// チュートリアルシーンの終了条件
-		if (Input::GetInstance()->PushKey(DIK_SPACE))
+		if (Input::GetInstance()->TriggerKey(DIK_SPACE))
 		{
+			Audio::GetInstance()->PlayWave(Botan_);
 			// フェードアウト開始
 			phase_ = Phase::kFadeOut;
 			fade_->Start(Fade::Status::FadeOut, 1.0f);

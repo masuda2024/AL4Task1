@@ -17,6 +17,7 @@
 
 #include "DeathParticle.h"
 
+#include <algorithm>
 // ゲームシーン
 
 class GameScene 
@@ -79,6 +80,15 @@ private:
 	Player* player_ = nullptr;
 	// モデルプレイヤー
 	KamataEngine::Model* modelPlayer_ = nullptr;
+
+
+
+	// プレイヤーHPテクスチャハンドル
+	uint32_t playerhpHandle_ = 0;
+	// スプライト
+	Sprite* playerhpSprite_ = nullptr;
+
+
 
 	// 天球
 	KamataEngine::Model* modelskydome_ = nullptr;

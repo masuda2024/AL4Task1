@@ -8,11 +8,23 @@ using namespace KamataEngine;
 void TitleScene::Initialize() 
 {
 	// 3Dモデルの生成
-	//model_ = Model::CreateFromOBJ("titleFont02");
+	model_ = Model::CreateFromOBJ("titleFont02");
 	modelTitle_UI_ = Model::CreateFromOBJ("Title_UI");
+
+	modelCredit_ = Model::CreateFromOBJ("Credit");
+
+
+
+
+
+	//Springin ボタン・システム　決定1
+	Botan_ = Audio::GetInstance()->LoadWave("Sounds/Decision1.mp3");
+
 
 	// modelPlayer_ = Model::CreateFromOBJ("Player03");
 	//  3Dモデルの生成
+
+
 
 	// スカイドームの生成
 	modelskydome_ = Model::CreateFromOBJ("skydome", true);
@@ -41,8 +53,9 @@ void TitleScene::Update()
 	{
 	case Phase::kMain:
 		// タイトルシーンの終了条件
-		if (Input::GetInstance()->PushKey(DIK_SPACE))
+		if (Input::GetInstance()->TriggerKey(DIK_SPACE))
 		{
+			Audio::GetInstance()->PlayWave(Botan_);
 			// フェードアウト開始
 			phase_ = Phase::kFadeOut;
 			fade_->Start(Fade::Status::FadeOut, 1.0f);
@@ -50,9 +63,10 @@ void TitleScene::Update()
 			finished_ = true;
 		}
 
-		// Tを押してチュートリアルシーンへ分岐
-		if (Input::GetInstance()->PushKey(DIK_E)) 
+		// Eを押してチュートリアルシーンへ分岐
+		if (Input::GetInstance()->TriggerKey(DIK_E)) 
 		{
+			Audio::GetInstance()->PlayWave(Botan_);
 			// フェードアウト開始
 			phase_ = Phase::kFadeOut;
 			fade_->Start(Fade::Status::FadeOut, 1.0f);
@@ -106,10 +120,13 @@ void TitleScene::Draw()
 	Model::PreDraw();
 
 	// ここに3Dモデルインスタンスの描画処理を記述する
-	//model_->Draw(worldTransform_, camera_);
+	model_->Draw(worldTransform_, camera_);
 
 	modelTitle_UI_->Draw(worldTransform_, camera_);
-	//  modelPlayer_->Draw(worldTransformPlayer_, camera_);
+	//modelPlayer_->Draw(worldTransformPlayer_, camera_);
+
+	modelCredit_->Draw(worldTransform_, camera_);
+
 
 	modelskydome_->Draw(worldTransformPlayer_, camera_);
 
@@ -124,8 +141,8 @@ TitleScene::~TitleScene()
 {
 	// モデル
 	delete model_;
-	// delete modelTitle_UI_;
-	//  delete modelPlayer_;
+	delete modelTitle_UI_;
+	delete modelCredit_;
 	//   フェード
 	delete fade_;
 

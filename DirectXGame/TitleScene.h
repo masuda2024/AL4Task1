@@ -60,6 +60,9 @@ private:
 
 	// モデルプレイヤー
 	KamataEngine::Model* modelPlayer_ = nullptr;
+	
+	KamataEngine::Model* modelCredit_ = nullptr;
+	
 	// カメラ
 	KamataEngine::Camera camera_;
 	// ワールドトランスフォーム
@@ -70,4 +73,6 @@ private:
 	Fade* fade_ = nullptr;
 	// 現在のフェーズ
 	Phase phase_ = Phase::kFadeIn;
+
+	uint32_t Botan_ = 0;
 };
